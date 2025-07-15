@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sir. Mahdi - Personal Blog & Tools</title>
+    <style>
+        :root {
+            --primary-color: #ff6bff;
+            --secondary-color: #9d4edd;
+            --bg-color: #0f0f1a;
+            --text-color: #f0f0f0;
+            --card-bg: #1a1a2e;
+            --transition-speed: 0.5s;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            background: linear-gradient(-45deg, #0f0f1a, #1a1a2e, #2d1a3d, #3d1a4d);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        header {
+            background: rgba(15, 15, 26, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(157, 78, 221, 0.3);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: logoGlow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes logoGlow {
+            from { text-shadow: 0 0 5px var(--primary-color); }
+            to { text-shadow: 0 0 20px var(--secondary-color); }
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all var(--transition-speed) ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            transition: width var(--transition-speed) ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        main {
+            margin-top: 80px;
+            padding: 2rem;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all var(--transition-speed) ease;
+            box-shadow: 0 4px 15px rgba(157, 78, 221, 0.4);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(157, 78, 221, 0.6);
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity var(--transition-speed) ease;
+        }
+        
+        .cta-button:hover::before {
+            opacity: 1;
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.2;
+            filter: blur(40px);
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-50px) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
+        }
+        
+        .shape-1 {
+            width: 200px;
+            height: 200px;
+            background: var(--primary-color);
+            top: 10%;
+            left: 10%;
+            animation-duration: 20s;
+        }
+        
+        .shape-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--secondary-color);
+            top: 60%;
+            left: 70%;
+            animation-duration: 25s;
+        }
+        
+        .shape-3 {
+            width: 150px;
+            height: 150px;
+            background: #4cc9f0;
+            top: 80%;
+            left: 20%;
+            animation-duration: 15s;
+        }
+        
+        .section {
+            padding: 4rem 0;
+            border-bottom: 1px solid rgba(157, 78, 221, 0.2);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all var(--transition-speed) ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(157, 78, 221, 0.1);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(157, 78, 221, 0.3);
+            border-color: rgba(157, 78, 221, 0.3);
+        }
+        
+        .card-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .card-img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(15, 15, 26, 0.8));
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+        }
+        
+        .card-content h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+        
+        .card-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: rgba(157, 78, 221, 0.2);
+            color: var(--secondary-color);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .read-more {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all var(--transition-speed) ease;
+        }
+        
+        .read-more:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+        
+        .developer-section {
+            background: rgba(157, 78, 221, 0.05);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 3rem;
+            border: 1px dashed rgba(157, 78, 221, 0.3);
+        }
+        
+        .developer-section h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+        
+        .developer-controls {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .developer-controls button {
+            padding: 0.5rem 1rem;
+            background: rgba(157, 78, 221, 0.2);
+            color: var(--text-color);
+            border: 1px solid var(--secondary-color);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+        }
+        
+        .developer-controls button:hover {
+            background: rgba(157, 78, 221, 0.4);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all var(--transition-speed) ease;
+        }
+        
+        .social-link:hover {
+            background: rgba(157, 78, 221, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .social-link i {
+            font-size: 1.2rem;
+        }
+        
+        .social-link.telegram {
+            color: #0088cc;
+        }
+        
+        .social-link.whatsapp {
+            color: #25D366;
+        }
+        
+        .social-link.kitab {
+            color: #ff6b6b;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(15, 15, 26, 0.8);
+            margin-top: 3rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all var(--transition-speed) ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .copyright {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+        .delay-5 { animation-delay: 1s; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: rgba(15, 15, 26, 0.95);
+                padding: 1rem 0;
+                gap: 1rem;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary-color), var(--secondary-color));
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(var(--secondary-color), var(--primary-color));
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">sir. Mahdi</div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links" id="navLinks">
+                <a href="#home">Home</a>
+                <a href="#blog">Blog</a>
+                <a href="#tools">Tools</a>
+                <a href="#courses">Courses</a>
+                <a href="#code">Code</a>
+                <a href="#about">About</a>
+                <a href="#developer">Developer</a>
+            </div>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="home" class="hero">
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+            <h1 class="animate">Welcome to My sir. Mahdi</h1>
+            <p class="animate delay-1">A personal blog where I share tools, courses, code snippets, and my journey as a developer. Explore, learn, and create with me!</p>
+            <a href="#blog" class="cta-button animate delay-2">Start Exploring</a>
+        </section>
+        
+        <!-- Blog Section -->
+        <section id="blog" class="section">
+            <div class="section-title">
+                <h2>Latest Blog Posts</h2>
+            </div>
+            <div class="grid">
+                <div class="card animate">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="card-content">
+                        <h3>Mastering React Hooks</h3>
+                        <p>Learn how to effectively use React Hooks to simplify your functional components and manage state like a pro.</p>
+                        <div class="card-footer">
+                            <span class="tag">React</span>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card animate delay-1">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="card-content">
+                        <h3>CSS Grid vs Flexbox</h3>
+                        <p>When to use CSS Grid and when to stick with Flexbox? This comprehensive guide will help you decide.</p>
+                        <div class="card-footer">
+                            <span class="tag">CSS</span>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card animate delay-2">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1515879218367-8466d910aaa4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="card-content">
+                        <h3>Python Performance Tips</h3>
+                        <p>Boost your Python code performance with these practical tips and tricks from production environments.</p>
+                        <div class="card-footer">
+                            <span class="tag">Python</span>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Tools Section -->
+        <section id="tools" class="section">
+            <div class="section-title">
+                <h2>Developer Tools</h2>
+            </div>
+            <div class="grid">
+                <div class="card animate">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="card-content">
+                        <h3>Code Formatter</h3>
+                        <p>Format your code automatically with our online tool supporting multiple languages including JavaScript, Python, and more.</p>
+                        <div class="card-footer">
+                            <span class="tag">Tool</span>
+                            <a href="#" class="read-more">Try It</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card animate delay-1">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="card-content">
+                        <h3>API Tester</h3>
+                        <p>Test your REST APIs with this powerful yet simple tool. Supports all HTTP methods and authentication types.</p>
+                        <div class="card-footer">
+                            <span class="tag">API</span>
+                            <a href="#" class="read-more">Try It</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card animate delay-2">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="card-content">
+                        <h3>Database Designer</h3>
+                        <p>Visualize and design your database schema with this interactive tool. Export to SQL or NoSQL formats.</p>
+                        <div class="card-footer">
+                            <span class="tag">Database</span>
+                            <a href="#" class="read-more">Try It</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Courses Section -->
+        <section id="courses" class="section">
+            <div class="section-title">
+                <h2>Featured Courses</h2>
+            </div>
+            <div class="grid">
+                <div class="card animate">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="card-content">
+                        <h3>Full Stack Development</h3>
+                        <p>Master both frontend and backend development with this comprehensive course covering React, Node.js, and MongoDB.</p>
+                        <div class="card-footer">
+                            <span class="tag">Web Dev</span>
+                            <a href="#" class="read-more">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card animate delay-1">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="card-content">
+                        <h3>Machine Learning Basics</h3>
+                        <p>Learn the fundamentals of machine learning with Python, TensorFlow, and scikit-learn through practical projects.</p>
+                        <div class="card-footer">
+                            <span class="tag">ML/AI</span>
+                            <a href="#" class="read-more">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card animate delay-2">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="card-content">
+                        <h3>DevOps Essentials</h3>
+                        <p>From Docker to Kubernetes, learn how to implement DevOps practices in your development workflow.</p>
+                        <div class="card-footer">
+                            <span class="tag">DevOps</span>
+                            <a href="#" class="read-more">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Code Section -->
+        <section id="code" class="section">
+            <div class="section-title">
+                <h2>Code Snippets</h2>
+            </div>
+            <div class="grid">
+                <div class="card animate">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1579403124614-197f69d8187b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="card-content">
+                        <h3>Responsive Navbar</h3>
+                        <p>A clean, responsive navigation bar with mobile menu toggle built with pure CSS and JavaScript.</p>
+                        <div class="card-footer">
+                            <span class="tag">CSS/JS</span>
+                            <a href="#" class="read-more">View Code</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card animate delay-1">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="card-content">
+                        <h3>Authentication Middleware</h3>
+                        <p>Express.js middleware for JWT authentication with role-based access control implementation.</p>
+                        <div class="card-footer">
+                            <span class="tag">Node.js</span>
+                            <a href="#" class="read-more">View Code</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card animate delay-2">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="card-content">
+                        <h3>Data Visualization</h3>
+                        <p>Create interactive charts and graphs with D3.js and React for your data visualization needs.</p>
+                        <div class="card-footer">
+                            <span class="tag">React</span>
+                            <a href="#" class="read-more">View Code</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="section-title">
+                <h2>About Me</h2>
+            </div>
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
+                    Hi, I'm a passionate full-stack developer with expertise in JavaScript, Python, and cloud technologies. 
+                    I created this space to share my knowledge, tools, and experiences with the developer community.
+                    When I'm not coding, you can find me contributing to open-source projects or mentoring new developers.
+                </p>
+                <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; color: var(--primary-color); font-weight: bold;">5+</div>
+                        <div>Years Experience</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; color: var(--primary-color); font-weight: bold;">50+</div>
+                        <div>Projects Completed</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; color: var(--primary-color); font-weight: bold;">10K+</div>
+                        <div>Students Taught</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Developer Section -->
+        <section id="developer" class="section">
+            <div class="section-title">
+                <h2>Developer Zone</h2>
+            </div>
+            
+            <div class="developer-section animate">
+                <h3>Custom Content Management</h3>
+                <p>This section is exclusively for the developer to add, edit, or remove any content dynamically.</p>
+                
+                <div class="developer-controls">
+                    <button id="addSectionBtn">Add New Section</button>
+                    <button id="editContentBtn">Edit Content</button>
+                    <button id="changeThemeBtn">Change Theme</button>
+                </div>
+                
+                <div id="dynamicContent" style="margin-top: 2rem;">
+                    <!-- Dynamic content will be added here -->
+                    <div class="card">
+                        <div class="card-content">
+                            <h3>Welcome to Developer Zone</h3>
+                            <p>Use the controls above to customize this section. Add new content blocks, edit existing ones, or change the site's appearance.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://t.me/yourusername" class="social-link telegram" target="_blank">
+                        <i class="fab fa-telegram"></i> Telegram
+                    </a>
+                    <a href="https://wa.me/yournumber" class="social-link whatsapp" target="_blank">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="https://kitabup.com/yourprofile" class="social-link kitab" target="_blank">
+                        <i class="fas fa-book"></i> Kitab Up
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Additional sections as requested -->
+            <div class="grid" style="margin-top: 3rem;">
+                <!-- Section 1 -->
+                <div class="card animate">
+                    <div class="card-content">
+                        <h3>Project Showcase</h3>
+                        <p>Highlight your latest projects with images, descriptions, and links to live demos or repositories.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 2 -->
+                <div class="card animate delay-1">
+                    <div class="card-content">
+                        <h3>Tech Stack</h3>
+                        <p>Display your preferred technologies and tools with proficiency levels and experience.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 3 -->
+                <div class="card animate delay-2">
+                    <div class="card-content">
+                        <h3>Testimonials</h3>
+                        <p>Showcase feedback from clients, students, or colleagues to build credibility.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 4 -->
+                <div class="card animate">
+                    <div class="card-content">
+                        <h3>Timeline</h3>
+                        <p>Create a visual timeline of your career milestones and important achievements.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 5 -->
+                <div class="card animate delay-1">
+                    <div class="card-content">
+                        <h3>Resources</h3>
+                        <p>Share your favorite books, courses, and tools that helped you in your journey.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 6 -->
+                <div class="card animate delay-2">
+                    <div class="card-content">
+                        <h3>Contact Form</h3>
+                        <p>Add a contact form for visitors to reach out directly from your site.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 7 -->
+                <div class="card animate">
+                    <div class="card-content">
+                        <h3>Newsletter</h3>
+                        <p>Allow visitors to subscribe to your newsletter for updates and new content.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 8 -->
+                <div class="card animate delay-1">
+                    <div class="card-content">
+                        <h3>FAQ</h3>
+                        <p>Answer frequently asked questions about your services, courses, or background.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 9 -->
+                <div class="card animate delay-2">
+                    <div class="card-content">
+                        <h3>Live Coding</h3>
+                        <p>Embed a live coding environment like CodePen or JSFiddle for interactive examples.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 10 -->
+                <div class="card animate">
+                    <div class="card-content">
+                        <h3>API Docs</h3>
+                        <p>Document any APIs or libraries you've created for others to use.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 11 -->
+                <div class="card animate delay-1">
+                    <div class="card-content">
+                        <h3>Challenge Board</h3>
+                        <p>Post coding challenges for visitors to solve and learn from.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 12 -->
+                <div class="card animate delay-2">
+                    <div class="card-content">
+                        <h3>Video Tutorials</h3>
+                        <p>Embed or link to your video tutorials and screencasts.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 13 -->
+                <div class="card animate">
+                    <div class="card-content">
+                        <h3>Open Source</h3>
+                        <p>Showcase your open-source contributions and projects.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 14 -->
+                <div class="card animate delay-1">
+                    <div class="card-content">
+                        <h3>Speaking Engagements</h3>
+                        <p>List your past and upcoming talks, workshops, and conferences.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 15 -->
+                <div class="card animate delay-2">
+                    <div class="card-content">
+                        <h3>Book Recommendations</h3>
+                        <p>Share your favorite technical books with reviews.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 16 -->
+                <div class="card animate">
+                    <div class="card-content">
+                        <h3>Podcast</h3>
+                        <p>Embed episodes if you have a podcast or appear as a guest.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 17 -->
+                <div class="card animate delay-1">
+                    <div class="card-content">
+                        <h3>Blog Series</h3>
+                        <p>Highlight multi-part tutorial series or in-depth explorations.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 18 -->
+                <div class="card animate delay-2">
+                    <div class="card-content">
+                        <h3>Community</h3>
+                        <p>Link to forums, Discord servers, or other communities you're part of.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 19 -->
+                <div class="card animate">
+                    <div class="card-content">
+                        <h3>Hire Me</h3>
+                        <p>Details about your availability for freelance work or consulting.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 20 -->
+                <div class="card animate delay-1">
+                    <div class="card-content">
+                        <h3>Side Projects</h3>
+                        <p>Show off your passion projects and experiments.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 21 -->
+                <div class="card animate delay-2">
+                    <div class="card-content">
+                        <h3>Tech News</h3>
+                        <p>Share your commentary on recent tech news and trends.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 22 -->
+                <div class="card animate">
+                    <div class="card-content">
+                        <h3>Workflow</h3>
+                        <p>Detail your development environment and workflow setup.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 23 -->
+                <div class="card animate delay-1">
+                    <div class="card-content">
+                        <h3>Case Studies</h3>
+                        <p>In-depth looks at how you solved specific problems.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 24 -->
+                <div class="card animate delay-2">
+                    <div class="card-content">
+                        <h3>Mentorship</h3>
+                        <p>Information about your mentorship programs or availability.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 25 -->
+                <div class="card animate">
+                    <div class="card-content">
+                        <h3>Workshops</h3>
+                        <p>Details about workshops you offer, either live or recorded.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 26 -->
+                <div class="card animate delay-1">
+                    <div class="card-content">
+                        <h3>GitHub Stats</h3>
+                        <p>Display your GitHub contributions and activity.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 27 -->
+                <div class="card animate delay-2">
+                    <div class="card-content">
+                        <h3>Tech Stack Icons</h3>
+                        <p>Visual representation of technologies you work with.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 28 -->
+                <div class="card animate">
+                    <div class="card-content">
+                        <h3>Reading List</h3>
+                        <p>Articles and papers you're currently reading or recommend.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 29 -->
+                <div class="card animate delay-1">
+                    <div class="card-content">
+                        <h3>Year in Review</h3>
+                        <p>Annual recap of your achievements and lessons learned.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 30 -->
+                <div class="card animate delay-2">
+                    <div class="card-content">
+                        <h3>Roadmap</h3>
+                        <p>Your future plans and goals for skills to learn.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#blog">Blog</a>
+            <a href="#tools">Tools</a>
+            <a href="#courses">Courses</a>
+            <a href="#code">Code</a>
+            <a href="#about">About</a>
+            <a href="#developer">Developer</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms</a>
+        </div>
+        <div class="copyright">
+            &copy; 2023 sir. Mahdi. All rights reserved.
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Developer controls
+        const addSectionBtn = document.getElementById('addSectionBtn');
+        const editContentBtn = document.getElementById('editContentBtn');
+        const changeThemeBtn = document.getElementById('changeThemeBtn');
+        const dynamicContent = document.getElementById('dynamicContent');
+        
+        let sectionCounter = 1;
+        
+        addSectionBtn.addEventListener('click', () => {
+            sectionCounter++;
+            const newSection = document.createElement('div');
+            newSection.className = 'card';
+            newSection.innerHTML = `
+                <div class="card-content">
+                    <h3 contenteditable="true">New Section ${sectionCounter}</h3>
+                    <p contenteditable="true">This is a new section added dynamically. Click to edit the content.</p>
+                    <div class="card-footer">
+                        <button class="delete-section" style="background: #ff6b6b; color: white; border: none; padding: 0.3rem 0.8rem; border-radius: 5px; cursor: pointer;">Delete</button>
+                    </div>
+                </div>
+            `;
+            dynamicContent.appendChild(newSection);
+            
+            // Add delete functionality to the new button
+            newSection.querySelector('.delete-section').addEventListener('click', () => {
+                dynamicContent.removeChild(newSection);
+            });
+        });
+        
+        editContentBtn.addEventListener('click', () => {
+            const editableElements = document.querySelectorAll('[contenteditable]');
+            editableElements.forEach(el => {
+                el.contentEditable = el.contentEditable === 'true' ? 'false' : 'true';
+                el.style.border = el.contentEditable === 'true' ? '1px dashed rgba(157, 78, 221, 0.5)' : 'none';
+            });
+            
+            editContentBtn.textContent = editableElements[0].contentEditable === 'true' ? 
+                'Save Changes' : 'Edit Content';
+        });
+        
+        // Theme changer
+        const themes = [
+            { primary: '#ff6bff', secondary: '#9d4edd', bg: '#0f0f1a' },
+            { primary: '#4cc9f0', secondary: '#4361ee', bg: '#0a0a1a' },
+            { primary: '#f72585', secondary: '#7209b7', bg: '#0f0a1a' },
+            { primary: '#2ec4b6', secondary: '#e71d36', bg: '#0f1a0f' },
+            { primary: '#ff9e00', secondary: '#ff006e', bg: '#1a0f0f' }
+        ];
+        
+        let currentTheme = 0;
+        
+        changeThemeBtn.addEventListener('click', () => {
+            currentTheme = (currentTheme + 1) % themes.length;
+            const theme = themes[currentTheme];
+            
+            document.documentElement.style.setProperty('--primary-color', theme.primary);
+            document.documentElement.style.setProperty('--secondary-color', theme.secondary);
+            document.documentElement.style.setProperty('--bg-color', theme.bg);
+        });
+        
+        // Animate elements when they come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.card, .section-title, .hero h1, .hero p, .cta-button').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
